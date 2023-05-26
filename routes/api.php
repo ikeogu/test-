@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BlogController;
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,4 +23,7 @@ Route::prefix('v1')->group(function(){
         Route::post('register',[AuthController::class,'register'])->name('register');
         Route::post('login', [AuthController::class, 'login'])->name('login');
     });
+
+    Route::apiResource('blog-category', CategoryController::class);
+    Route::apiResource('blog-post', BlogController::class);
 });
