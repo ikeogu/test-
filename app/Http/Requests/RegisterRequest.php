@@ -33,7 +33,8 @@ class RegisterRequest extends FormRequest
                 ->symbols()
                 ->uncompromised()
 
-            ]
+        ],
+        'is_subscribed' => ['required', 'boolean']
         ];
     }
 
