@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\BlogCreatedEvent;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateBlogRequest;
 use App\Http\Resources\BlogResource;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -35,7 +37,7 @@ class BlogController extends Controller
     public function store(CreateBlogRequest $request) :  JsonResponse
     {
         //
-          $blog = Blog::create($request->validated());
+        $blog = Blog::create($request->validated());
          return response()->json([
             'message' => "Blog created successfully",
               'data' => $blog,
