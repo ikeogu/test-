@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\WelcomeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
@@ -19,6 +20,8 @@ class AuthController extends Controller
     {
         $user = User::create($request->validated());
         $token = $user->createToken("$user->name token")->accessToken;
+
+        event(new WelcomeEvent($user));
 
         return response()->json([
             'message' => "User created successfully",

@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\BlogCreatedEvent;
+use App\Events\WelcomeEvent;
+use App\Listeners\BlogCreatedListner;
+use App\Listeners\WelcomeListner;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +22,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        WelcomeEvent::class => [
+            WelcomeListner::class
+        ],
+        BlogCreatedEvent::class => [
+            BlogCreatedListner::class
+        ]
     ];
 
     /**
