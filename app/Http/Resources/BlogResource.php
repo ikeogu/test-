@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/** @mixin \App\Models\Blog */
 
 class BlogResource extends JsonResource
 {
@@ -25,8 +26,8 @@ class BlogResource extends JsonResource
              ],
              'relationships' => [
                 'category' => [
-                    'id' => strval($this->category->id),
-                     'titile' => $this->category->title
+                    'id' => strval($this->category?->id),
+                     'titile' => $this->category?->title
                 ]
              ]
         ];
