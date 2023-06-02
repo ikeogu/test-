@@ -47,7 +47,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(int $category)
+    public function show(int $category) : JsonResponse
     {
         try {
             //code...
@@ -73,6 +73,7 @@ class CategoryController extends Controller
     public function update(Request $request, int $category) : JsonResponse
     {
         //
+        /** @var Category $category */
         $category = Category::find($category);
 
         $category->update([
@@ -91,9 +92,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $category)
+    public function destroy(int $category) : JsonResponse
     {
         //
+        /** @var Category $category */
          $category = Category::find($category);
          $category->delete();
 

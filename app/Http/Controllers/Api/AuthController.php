@@ -18,6 +18,7 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request) : JsonResponse
     {
+        /** @var User $user */
         $user = User::create($request->validated());
         $token = $user->createToken("$user->name token")->accessToken;
 
