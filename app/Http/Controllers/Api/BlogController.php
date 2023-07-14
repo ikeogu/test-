@@ -11,6 +11,7 @@ use App\Http\Resources\BlogResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -38,9 +39,14 @@ class BlogController extends Controller
     {
         //
         $blog = Blog::create($request->validated());
+
+        if($request->has('image') && !empty($request->image)){
+            $blog->addMediaFromRequest('image')->toMediaCollection('image');
+        }
+
          return response()->json([
             'message' => "Blog created successfully",
-              'data' => $blog,
+              'data' => new BlogResource($blog),
              'status' => 200
         ]);
     }
@@ -84,6 +90,13 @@ class BlogController extends Controller
             'title' => $request->title,
             'description' => $request->description
         ]);
+
+        if ($request->has('image') && !empty($request->image)) {
+
+            DB::table('media')->where('model_id', $blog->id)->delete();
+            $blog->addMediaFromRequest('image')->toMediaCollection('image');
+        }
+
 
          return response()->json([
             'message' => "Blog Updated successfully",

@@ -23,6 +23,6 @@ class WelcomeListner
     public function handle(object $event): void
     {
         //
-        Mail::to($event->user->email)->send(new WelcomeMail($event->user));
+        Mail::to($event->user->email)->send(new WelcomeMail($event->user)); // @phpstan-ignore-line
     }
 }

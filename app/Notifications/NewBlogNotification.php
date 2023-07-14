@@ -38,7 +38,8 @@ class NewBlogNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->subject('New Blog Post')
-                    ->greeting('Hello dear,' . $notifiable->name)
+                    ->greeting('Hello dear,' . $notifiable->name)// @phpstan-ignore-line
+
                     ->line('The is to notify you of our new blog post titled '. $this->blog->title)
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
