@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,11 @@ Route::prefix('v1')->group(function(){
 
     Route::apiResource('blog-category', CategoryController::class);
     Route::apiResource('blog-post', BlogController::class);
+
+    Route::group(['middleware' => 'auth:api'], static function() {
+
+        Route::post('makePayment', [PaymentController::class, 'makePayment']);
+
+    });
+    Route::get('verifyTransaction', [PaymentController::class, 'verifyTransaction'])->name('verifyTransaction');
 });

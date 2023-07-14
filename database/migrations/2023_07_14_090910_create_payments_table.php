@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->uuid('id')->index()->uniqid();
-            $table->string('title');
+        Schema::create('payments', function (Blueprint $table) {
+            $table->id();
+            $table->double('amount', 20,8);
+            $table->string('reference');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('staus')->default('pending');
             $table->tinyText('description');
             $table->timestamps();
         });
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('payments');
     }
 };

@@ -22,7 +22,14 @@ class BlogResource extends JsonResource
              'attributes' => [
                 'title' => $this->title,
                 'body' => $this->body,
-                'author'=> $this->author
+                'author'=> $this->author,
+
+                'image' => [
+                    'file_name' => $this->image->file_name,
+                    'mime_type' => $this->image->mime_type,
+                    'size' => $this->image->size,
+                    'original_url' => $this->image->original_url,
+                ]
              ],
              'relationships' => [
                 'category' => [
